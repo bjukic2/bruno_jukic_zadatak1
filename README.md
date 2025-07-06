@@ -1,6 +1,6 @@
 # TicketHub – FastAPI servis za korisničke tickete
 
-TicketHub je middleware REST servis razvijen u sklopu AI Academy 2025. Cilj mu je dohvaćanje i izlaganje "support ticketa" iz vanjskog izvora (DummyJSON), uz napredne funkcionalnosti poput filtriranja, pretrage, paginacije, keširanja i autentifikacije.
+TicketHub je middleware REST servis razvijen u sklopu Abysalto AI Academy 2025. Cilj mu je dohvaćanje i izlaganje "support ticketa" iz vanjskog izvora (DummyJSON), uz napredne funkcionalnosti poput filtriranja, pretrage, paginacije, keširanja i autentifikacije.
 
 ---
 
