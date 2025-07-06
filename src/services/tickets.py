@@ -22,7 +22,7 @@ CACHE_TICKETS_KEY = "tickets_cache"
 CACHE_STATS_KEY = "stats_cache"
 CACHE_TTL = 60  
 
-async def get_users():
+async def get_users(): #funkcija za prikupljanje korisnika
     global _cached_users
     if _cached_users is not None:
         logger.info("Using cached users")
@@ -42,7 +42,7 @@ async def get_users():
     return _cached_users
 
 
-async def fetch_tickets():
+async def fetch_tickets(): #funkcija za prikupljanje todos
     cached = await redis_client.get(CACHE_TICKETS_KEY)
     if cached:
         logger.info("Using cached tickets from Redis")
@@ -75,14 +75,14 @@ async def fetch_tickets():
         )
         tickets.append(t)
 
-    tickets_json = [t.dict() for t in tickets]  # pretpostavljam da Ticket ima .dict()
+    tickets_json = [t.dict() for t in tickets]
     await redis_client.set(CACHE_TICKETS_KEY, json.dumps(tickets_json), ex=CACHE_TTL)
 
     logger.info(f"Fetched {len(tickets)} tickets")
     return tickets
 
 
-async def compute_stats():
+async def compute_stats(): #funkcija za prikazivanje stats
     cached = await redis_client.get(CACHE_STATS_KEY)
     if cached:
         logger.info("Using cached stats from Redis")

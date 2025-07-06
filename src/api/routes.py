@@ -11,7 +11,8 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-@router.get("/tickets")
+#implementacija različitih GET i POST endopointova
+@router.get("/tickets") #GET endpoint za prikazivanje ticketsa po različitih filterima
 @limiter.limit("10/minute")
 async def get_tickets(
     request: Request,
@@ -33,7 +34,7 @@ async def get_tickets(
     return tickets[start:start+size]
 
 
-@router.get("/tickets/{ticket_id}")
+@router.get("/tickets/{ticket_id}") #GET endpoint za prikaz ticketsa po id-u
 async def get_ticket_by_id(ticket_id: int):
     logger.info(f"GET /tickets/{ticket_id} called")
     tickets = await fetch_tickets()
@@ -43,19 +44,19 @@ async def get_ticket_by_id(ticket_id: int):
     logger.warning(f"Ticket with id {ticket_id} not found")
     return {"error": "Ticket not found"}
 
-@router.get("/stats")
+@router.get("/stats") #GET endpoint za prikazivanje stats
 async def stats():
     logger.info("GET /stats called")
     return await compute_stats()
 
-@router.get("/health")
+@router.get("/health") #GET endpoint za prikazivanje health
 async def health_check():
     logger.info("GET /health called")
     return {"status": "ok"}
 
 DUMMYJSON_LOGIN_URL = "https://dummyjson.com/auth/login"
 
-@router.post("/auth/login")
+@router.post("/auth/login") #POST endpoint za autorizaciju
 async def login(username: str, password: str):
     logger.info(f"POST /auth/login called with username={username}")
     async with httpx.AsyncClient() as client:
@@ -71,7 +72,7 @@ async def login(username: str, password: str):
         logger.info(f"User {username} logged in successfully")
         return response.json()
     
-@router.get("/", include_in_schema=False)
+@router.get("/", include_in_schema=False) #GET endpoint za prikaz static html
 async def serve_redoc():
     path = os.path.abspath("static/docs.html")
     if not os.path.exists(path):
