@@ -35,20 +35,28 @@ TicketHub je middleware REST servis razvijen u sklopu Abysalto AI Academy 2025. 
 - TTL je postavljen na npr. 60 sekundi da bi se smanjio broj vanjskih poziva
 - Redis se koristi kroz aioredis
 
+---
+
 ## Rate limiting
 
 - Implementirano pomoću SlowAPI
 - Default: 10 zahtjeva/min po IP adresi
 - 429 greška ako se prekorači
 
+---
+
 ## Autentifikacija
 
 - POST /auth/login koristi DummyJSON login
 - username/password kombinacija: emilys/emilyspass
 
+---
+
 ## Korišteni alati (AI)
 
 - Pomoć u pisanju koda i dokumentacije korištenjem ChatGPT i Perplexity
+
+---
 
 ## Postavljanje lokalno
 
@@ -80,6 +88,8 @@ make run
 #Swagger dokumentacija je dostupna na http://localhost:8000/docs
 ```
 
+---
+
 ## Pokretanje s Docker Compose
 
 ```bash
@@ -88,10 +98,16 @@ make docker
 #Redis: http://localhost:6739
 ```
 
+---
+
 ## Testiranje
 
 ```bash
 make test
 ```
 
+---
+
 ## Struktura projekta
+
+---
