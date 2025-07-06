@@ -15,7 +15,7 @@ docs:
 	redoc-cli bundle openapi.json -o static/docs.html
 
 redis-run:
-	docker run -d --rm -p 6379:6379 --name tickethub-redis redis
+	docker start tickethub-redis || docker run -d -p 6379:6379 --name tickethub-redis redis
 
 redis-stop:
 	docker stop tickethub-redis

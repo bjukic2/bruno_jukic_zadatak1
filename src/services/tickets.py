@@ -14,14 +14,13 @@ USERS_URL = "https://dummyjson.com/users"
 
 _cached_users = None
 
-# Redis client init
 redis_host = os.getenv("REDIS_HOST", "localhost")
 redis_port = int(os.getenv("REDIS_PORT", 6379))
 redis_client = redis.Redis(host=redis_host, port=redis_port, decode_responses=True)
 
 CACHE_TICKETS_KEY = "tickets_cache"
 CACHE_STATS_KEY = "stats_cache"
-CACHE_TTL = 60  # u sekundama
+CACHE_TTL = 60  
 
 async def get_users():
     global _cached_users
@@ -76,7 +75,6 @@ async def fetch_tickets():
         )
         tickets.append(t)
 
-    # Cache to Redis
     tickets_json = [t.dict() for t in tickets]  # pretpostavljam da Ticket ima .dict()
     await redis_client.set(CACHE_TICKETS_KEY, json.dumps(tickets_json), ex=CACHE_TTL)
 
@@ -99,7 +97,7 @@ async def compute_stats():
         "by_status": status_counts,
         "by_priority": priority_counts
     }
-    # Cache stats
+    
     await redis_client.set(CACHE_STATS_KEY, json.dumps(stats), ex=CACHE_TTL)
 
     return stats
