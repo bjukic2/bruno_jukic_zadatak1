@@ -107,7 +107,3 @@ make test
 ```
 
 ---
-
-## Struktura projekta
-
----
